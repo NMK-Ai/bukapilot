@@ -36,7 +36,7 @@ def compute_set_distance(state):
     return 0
 
 def create_can_steer_command(packer, steer, steer_req, wheel_touch_warning, raw_cnt, stock_lks_settings, lks):
-  """Creates a CAN message for the Perodua LKA Steer Command."""
+  """Creates a CAN message for the Proton LKA Steer Command."""
   values = {
     "LKAS_ENGAGED1": steer_req,
     "LKAS_LINE_ACTIVE": steer_req,
@@ -57,7 +57,7 @@ def create_can_steer_command(packer, steer, steer_req, wheel_touch_warning, raw_
   return packer.make_can_msg("ADAS_LKAS", 0, values)
 
 def create_hud(packer, steer, steer_req, ldw, rlane, llane):
-  """Creates a CAN message for the Perodua LKA Steer Command."""
+  """Creates a CAN message for the Proton LKA Steer Command."""
   steer_dir = steer >= 0
   values = {
     "LANE_DEPARTURE_WARNING_RIGHT": ldw and not steer_dir,
@@ -76,7 +76,7 @@ def create_hud(packer, steer, steer_req, ldw, rlane, llane):
   return packer.make_can_msg("LKAS", 0, values)
 
 def create_lead_detect(packer, is_lead, steer_req):
-  """Creates a CAN message for the Perodua LKA Steer Command."""
+  """Creates a CAN message for the Proton LKA Steer Command."""
   values = {
     "LEAD_DISTANCE": 30,
     "NEW_SIGNAL_1": 0x7f,
