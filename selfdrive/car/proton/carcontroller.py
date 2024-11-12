@@ -76,14 +76,10 @@ class CarController():
     new_steer = int(round(actuators.steer * self.params.STEER_MAX))
 
     # stock Lane Departure Prevention (blue line)
-    # Code was fixed, commented because it could be dangerous without working with stock LKA at the same time.
-    '''
-    if not lat_active and (CS.lks_aux and CS.lks_tactile) and \
-        (CS.stock_ldp_left or CS.stock_ldp_right) and CS.stock_ldp_cmd != 0:
-      steer_dir = 1 if CS.stock_ldp_right else -1
+    if not lat_active and (CS.stock_ldp_left or CS.stock_ldp_right) and CS.stock_ldp_cmd != 0:
+      steer_dir = -1 if CS.steer_dir else 1
       new_steer = CS.stock_ldp_cmd * steer_dir * 0.5 # Reduced value because stock command was strong
       lat_active = True
-    '''
 
     apply_steer = apply_proton_steer_torque_limits(new_steer, self.last_steer, 0, self.params)
     self.steer_rate_limited = (new_steer != apply_steer) and (apply_steer != 0)
